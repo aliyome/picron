@@ -11,4 +11,23 @@ describe('solve', () => {
       expect(solve({ top: [[0]], left: [[1]] })).toBeFalsy();
     });
   });
+
+  describe('3x3', () => {
+    it('can solve', () => {
+      expect(
+        solve({
+          top: [
+            [0, 0, 0],
+            [0, 1, 0],
+            [0, 0, 0],
+          ],
+          left: [
+            [0, 0, 0],
+            [0, 1, 0],
+            [0, 0, 0],
+          ],
+        }),
+      ).toBeTruthy();
+    });
+  });
 });
