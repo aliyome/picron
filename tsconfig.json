@@ -27,7 +27,11 @@
      * of JS in `.svelte` files.
      */
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    /**
+     * for test
+     */
+    "types": ["vite/client", "@types/jest"]
   },
   /**
    * Use global.d.ts instead of compilerOptions.types
