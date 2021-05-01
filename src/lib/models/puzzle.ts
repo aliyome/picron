@@ -8,28 +8,20 @@ const isValidHint = (rows: Hint, columns: Hint) => sum(rows.map(sum)) === sum(co
 const isValidContent = (content: Content, width: number, height: number) =>
   content.length === height && content.every((line) => line.length === width);
 
-const initState = (data: PuzzleData) => {
-  const width = data.columns.length;
-  const state = new Array(data.columns.length * data.rows.length).fill(0 as UNKNOWN);
-  if (!data.content) {
+const initState = (width: number, height: number, content?: Content): Content => {
+  const state: Content = new Array(height).fill(null).map(() => new Array(width).fill(0));
+
+  if (!content) {
     return state;
   }
-  data.content.forEach((rows, y) => {
+  content.forEach((rows, y) => {
     rows.forEach((val, x) => {
-      state[y * width + x] = val;
+      state[y][x] = val;
     });
   });
   console.log(state);
 
   return state;
-};
-
-export const setter = (puzzle: Puzzle) => (x: number, y: number, value: Cell) => {
-  puzzle.state[y * puzzle.width + x] = value;
-};
-
-export const getter = (puzzle: Puzzle) => (x: number, y: number): Cell => {
-  return puzzle.state[y * puzzle.width + x];
 };
 
 export function init(data: PuzzleData): Puzzle {
@@ -50,7 +42,7 @@ export function init(data: PuzzleData): Puzzle {
       rows: initLineHint(data.rows),
       columns: initLineHint(data.columns),
     },
+    state: initState(width, height, data.content),
     originalContent: data.content,
-    state: initState(data),
   };
 }

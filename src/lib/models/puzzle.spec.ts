@@ -1,4 +1,4 @@
-import { getter, init, setter } from './puzzle';
+import { init } from './puzzle';
 
 describe('init', () => {
   it('throws an error when data is invalid', () => {
@@ -14,7 +14,10 @@ describe('init', () => {
   });
 
   it('makes initial state', () => {
-    expect(init({ rows: [[0], [0]], columns: [[0], [0]] }).state).toEqual([0, 0, 0, 0]);
+    expect(init({ rows: [[0], [0]], columns: [[0], [0]] }).state).toEqual([
+      [0, 0],
+      [0, 0],
+    ]);
     expect(
       init({
         rows: [[0], [0], [0]],
@@ -25,18 +28,22 @@ describe('init', () => {
           [0, -1, 0],
         ],
       }).state,
-    ).toEqual([-1, 0, -1, 0, 0, -1, 0, -1, 0]);
+    ).toEqual([
+      [-1, 0, -1],
+      [0, 0, -1],
+      [0, -1, 0],
+    ]);
   });
 });
 
-describe('get/set', () => {
-  const puzzle = { width: 2, height: 2, state: [-1, 0, 1, 0] } as Puzzle;
-  const get = getter(puzzle);
-  const set = setter(puzzle);
-  it('accesses puzzle state', () => {
-    expect(get(0, 0)).toBe(-1);
-    expect(get(1, 0)).toBe(0);
-    set(0, 0, 1);
-    expect(get(0, 0)).toBe(1);
-  });
-});
+// describe('get/set', () => {
+//   const puzzle = { width: 2, height: 2, state: [-1, 0, 1, 0] } as Puzzle;
+//   const get = getter(puzzle);
+//   const set = setter(puzzle);
+//   it('accesses puzzle state', () => {
+//     expect(get(0, 0)).toBe(-1);
+//     expect(get(1, 0)).toBe(0);
+//     set(0, 0, 1);
+//     expect(get(0, 0)).toBe(1);
+//   });
+// });
