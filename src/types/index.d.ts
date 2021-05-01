@@ -26,6 +26,6 @@ interface Puzzle {
     rows: Hint;
     columns: Hint;
   };
-  originalContent: Content;
+  originalContent?: Content;
   state: Cell[];
 }
