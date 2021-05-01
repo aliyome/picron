@@ -1,4 +1,4 @@
-import { init } from './puzzle';
+import { columnGetter, init, rowGetter } from './puzzle';
 
 describe('init', () => {
   it('throws an error when data is invalid', () => {
@@ -36,14 +36,27 @@ describe('init', () => {
   });
 });
 
-// describe('get/set', () => {
-//   const puzzle = { width: 2, height: 2, state: [-1, 0, 1, 0] } as Puzzle;
-//   const get = getter(puzzle);
-//   const set = setter(puzzle);
-//   it('accesses puzzle state', () => {
-//     expect(get(0, 0)).toBe(-1);
-//     expect(get(1, 0)).toBe(0);
-//     set(0, 0, 1);
-//     expect(get(0, 0)).toBe(1);
-//   });
-// });
+describe('get/set', () => {
+  const puzzle = {
+    width: 3,
+    height: 2,
+    state: [
+      [-1, 0, 0],
+      [1, 0, 1],
+    ],
+  } as Puzzle;
+  const getColumn = columnGetter(puzzle);
+  const getRow = rowGetter(puzzle);
+  it('accesses puzzle state by column', () => {
+    expect(getColumn(0).length()).toBe(2);
+    expect(getColumn(0).get(0)).toBe(-1);
+    expect(getColumn(0).get(1)).toBe(1);
+    expect(getColumn(2).get(1)).toBe(1);
+  });
+  it('accesses puzzle state by row', () => {
+    expect(getRow(0).length()).toBe(3);
+    expect(getRow(0).get(0)).toBe(-1);
+    expect(getRow(0).get(1)).toBe(0);
+    expect(getRow(1).get(2)).toBe(1);
+  });
+});

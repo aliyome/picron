@@ -68,10 +68,10 @@ interface PuzzleData {
 type Puzzle = Readonly<{
   width: number;
   height: number;
-  hint: Readonly<{
+  hint: {
     rows: Hint;
     columns: Hint;
-  }>;
+  };
   state: Content;
   originalContent?: Content;
-}>;
+};

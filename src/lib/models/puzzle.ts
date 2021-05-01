@@ -1,3 +1,4 @@
+import { get } from 'svelte/store';
 import { sum } from '../helpers/array';
 
 const initLineHint = (hint: Hint): Hint =>
@@ -14,14 +15,41 @@ const initState = (width: number, height: number, content?: Content): Content =>
   if (!content) {
     return state;
   }
+
   content.forEach((rows, y) => {
     rows.forEach((val, x) => {
       state[y][x] = val;
     });
   });
-  console.log(state);
-
   return state;
+};
+
+export const rowGetter = (puzzle: Puzzle) => (y: number) => {
+  return {
+    get(i: number): Cell {
+      return puzzle.state[y][i];
+    },
+    set(i: number, value: Cell): void {
+      puzzle.state[y][i] = value;
+    },
+    length(): number {
+      return puzzle.width;
+    },
+  };
+};
+
+export const columnGetter = (puzzle: Puzzle) => (x: number) => {
+  return {
+    get(i: number): Cell {
+      return puzzle.state[i][x];
+    },
+    set(i: number, value: Cell): void {
+      puzzle.state[i][x] = value;
+    },
+    length(): number {
+      return puzzle.height;
+    },
+  };
 };
 
 export function init(data: PuzzleData): Puzzle {
