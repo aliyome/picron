@@ -1,4 +1,4 @@
-import { get, init, set } from './puzzle';
+import { getter, init, setter } from './puzzle';
 
 describe('init', () => {
   it('throws an error when data is invalid', () => {
@@ -31,12 +31,12 @@ describe('init', () => {
 
 describe('get/set', () => {
   const puzzle = { width: 2, height: 2, state: [-1, 0, 1, 0] } as Puzzle;
-  const getter = get(puzzle);
-  const setter = set(puzzle);
+  const get = getter(puzzle);
+  const set = setter(puzzle);
   it('accesses puzzle state', () => {
-    expect(getter(0, 0)).toBe(-1);
-    expect(getter(1, 0)).toBe(0);
-    setter(0, 0, 1);
-    expect(getter(0, 0)).toBe(1);
+    expect(get(0, 0)).toBe(-1);
+    expect(get(1, 0)).toBe(0);
+    set(0, 0, 1);
+    expect(get(0, 0)).toBe(1);
   });
 });

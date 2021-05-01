@@ -24,11 +24,11 @@ const initState = (data: PuzzleData) => {
   return state;
 };
 
-export const set = (puzzle: Puzzle) => (x: number, y: number, value: Cell) => {
+export const setter = (puzzle: Puzzle) => (x: number, y: number, value: Cell) => {
   puzzle.state[y * puzzle.width + x] = value;
 };
 
-export const get = (puzzle: Puzzle) => (x: number, y: number): Cell => {
+export const getter = (puzzle: Puzzle) => (x: number, y: number): Cell => {
   return puzzle.state[y * puzzle.width + x];
 };
 
