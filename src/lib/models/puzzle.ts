@@ -24,6 +24,14 @@ const initState = (data: PuzzleData) => {
   return state;
 };
 
+export const set = (puzzle: Puzzle) => (x: number, y: number, value: Cell) => {
+  puzzle.state[y * puzzle.width + x] = value;
+};
+
+export const get = (puzzle: Puzzle) => (x: number, y: number): Cell => {
+  return puzzle.state[y * puzzle.width + x];
+};
+
 export function init(data: PuzzleData): Puzzle {
   const width = data.columns.length;
   const height = data.rows.length;
