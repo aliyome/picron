@@ -80,8 +80,16 @@ export const isValidable = (line: Line, till: number) => {
   return true;
 };
 
-export const makeLine = (size: number, hint: LineHint) => {
-  const state = new Array(size).fill(cellType.Unknown);
+type DebugLine = Line & { state: Cell[] };
+export function makeLine(values: Cell[], hint: LineHint): DebugLine;
+export function makeLine(size: number, hint: LineHint): DebugLine;
+export function makeLine(sizeOrValues: number | Cell[], hint: LineHint): DebugLine {
+  let state: Cell[];
+  if (Array.isArray(sizeOrValues)) {
+    state = Array.from(sizeOrValues);
+  } else {
+    state = new Array(sizeOrValues).fill(cellType.Unknown);
+  }
   return {
     get(i: number): Cell {
       return state[i];
