@@ -1,5 +1,5 @@
 import { cellType } from '../helpers/const';
-import { isValid, makeLine } from './line';
+import { isValid, isValidable, makeLine } from './line';
 
 describe('Line isValid', () => {
   describe('[0]', () => {
@@ -40,8 +40,37 @@ describe('Line isValid', () => {
 
     it('invalid', () => {
       const line = makeLine(9, [2, 4, 1]);
-      line.state = [0, 1, 1, 0, 1, 1, 1, 0, 1];
+      setTestState(line);
       expect(isValid(line)).toBeFalsy();
+    });
+  });
+});
+
+describe('Line isValidable', () => {
+  describe('[0, 0, 1, 1, 0, 1, 0, 1, 0, 0]', () => {
+    const setTestState = (line: Line) => {
+      [0, 0, 1, 1, 0, 1, 0, 0, 0, 1].forEach((value, i) => {
+        line.set(i, value as Cell);
+      });
+    };
+    it('2 1 1 is valid', () => {
+      const line = makeLine(10, [2, 1, 1]);
+      setTestState(line);
+      for (let i = 0; i < line.length(); i++) {
+        expect(isValidable(line, i)).toBeTruthy();
+      }
+    });
+    it('2 1 2 is invalid', () => {
+      const line = makeLine(10, [2, 1, 2]);
+      setTestState(line);
+      expect(isValidable(line, 7)).toBeTruthy();
+      expect(isValidable(line, 8)).toBeFalsy();
+    });
+    it('2 2 1 is invalid', () => {
+      const line = makeLine(10, [2, 2, 1]);
+      setTestState(line);
+      expect(isValidable(line, 5)).toBeTruthy();
+      expect(isValidable(line, 6)).toBeFalsy();
     });
   });
 });
