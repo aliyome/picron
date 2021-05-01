@@ -31,7 +31,7 @@
     /**
      * for test
      */
-    "types": ["vite/client", "@types/jest"]
+    "types": ["src/types", "vite/client", "@types/jest"]
   },
   /**
    * Use global.d.ts instead of compilerOptions.types
