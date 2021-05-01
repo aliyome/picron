@@ -44,6 +44,17 @@ describe('get/set', () => {
       [-1, 0, 0],
       [1, 0, 1],
     ],
+    hint: {
+      rows: [
+        [1, 0],
+        [0, 1],
+      ],
+      columns: [
+        [1, 1],
+        [0, 0],
+        [-1, -1],
+      ],
+    },
   } as Puzzle;
   const getColumn = columnGetter(puzzle);
   const getRow = rowGetter(puzzle);
@@ -52,11 +63,13 @@ describe('get/set', () => {
     expect(getColumn(0).get(0)).toBe(-1);
     expect(getColumn(0).get(1)).toBe(1);
     expect(getColumn(2).get(1)).toBe(1);
+    expect(getColumn(2).hint()).toEqual([-1, -1]);
   });
   it('accesses puzzle state by row', () => {
     expect(getRow(0).length()).toBe(3);
     expect(getRow(0).get(0)).toBe(-1);
     expect(getRow(0).get(1)).toBe(0);
     expect(getRow(1).get(2)).toBe(1);
+    expect(getRow(1).hint()).toEqual([0, 1]);
   });
 });

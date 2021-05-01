@@ -22,8 +22,8 @@ type Content = Cell[][];
 interface Line {
   get(i: number): Cell;
   set(i: number, value: Cell): void;
-  data(): Cell[];
   length(): number;
+  hint(): LineHint;
 }
 
 type LineHint = number[];
@@ -74,4 +74,4 @@ type Puzzle = Readonly<{
   };
   state: Content;
   originalContent?: Content;
-};
+}>;

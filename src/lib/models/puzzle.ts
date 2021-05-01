@@ -24,7 +24,7 @@ const initState = (width: number, height: number, content?: Content): Content =>
   return state;
 };
 
-export const rowGetter = (puzzle: Puzzle) => (y: number) => {
+export const rowGetter = (puzzle: Puzzle) => (y: number): Line => {
   return {
     get(i: number): Cell {
       return puzzle.state[y][i];
@@ -35,10 +35,13 @@ export const rowGetter = (puzzle: Puzzle) => (y: number) => {
     length(): number {
       return puzzle.width;
     },
+    hint(): LineHint {
+      return puzzle.hint.rows[y];
+    },
   };
 };
 
-export const columnGetter = (puzzle: Puzzle) => (x: number) => {
+export const columnGetter = (puzzle: Puzzle) => (x: number): Line => {
   return {
     get(i: number): Cell {
       return puzzle.state[i][x];
@@ -48,6 +51,9 @@ export const columnGetter = (puzzle: Puzzle) => (x: number) => {
     },
     length(): number {
       return puzzle.height;
+    },
+    hint(): LineHint {
+      return puzzle.hint.columns[x];
     },
   };
 };
