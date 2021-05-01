@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { sum } from '../helpers/array';
+import { cellType } from '../helpers/const';
 
 const initLineHint = (hint: Hint): Hint =>
   hint.map((h) => (h.length === 1 && h[0] === 0 ? [] : [...h]));
@@ -10,7 +11,9 @@ const isValidContent = (content: Content, width: number, height: number) =>
   content.length === height && content.every((line) => line.length === width);
 
 const initState = (width: number, height: number, content?: Content): Content => {
-  const state: Content = new Array(height).fill(null).map(() => new Array(width).fill(0));
+  const state: Content = new Array(height)
+    .fill(null)
+    .map(() => new Array(width).fill(cellType.Unknown));
 
   if (!content) {
     return state;

@@ -1,10 +1,8 @@
-const cellType = {
-  Unknown: 0,
-  Checked: 1, // is known to be checked
-  Empty: -1, // is known to be empty
-} as const;
+type CellUnknown = 0;
+type CellChecked = 1; // is known to be checked
+type CellEmpty = -1; // is known to be empty
 
-type Cell = typeof cellType[keyof typeof cellType];
+type Cell = CellUnknown | CellChecked | CellEmpty;
 
 /**
  *  ?✓?
