@@ -3,6 +3,7 @@ import { init } from './puzzle';
 describe('init', () => {
   it('throws an error when data is invalid', () => {
     expect(() => init({ rows: [[0]], columns: [[1]] })).toThrow();
+    expect(() => init({ rows: [[0]], columns: [[0]], content: [[0, 0]] })).toThrow();
   });
 
   it('makes hint array blank when hint is [0]', () => {
