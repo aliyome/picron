@@ -7,15 +7,24 @@ describe('init', () => {
   });
 
   it('makes hint array blank when hint is [0]', () => {
-    const puzzle = init({ rows: [[0], [1]], columns: [[1], [0]] });
-    expect(puzzle.hint).toEqual({
+    expect(init({ rows: [[0], [1]], columns: [[1], [0]] }).hint).toEqual({
       rows: [[], [1]],
       columns: [[1], []],
     });
   });
 
   it('makes initial state', () => {
-    const puzzle = init({ rows: [[0], [0]], columns: [[0], [0]] });
-    expect(puzzle.state).toEqual([0, 0, 0, 0]);
+    expect(init({ rows: [[0], [0]], columns: [[0], [0]] }).state).toEqual([0, 0, 0, 0]);
+    expect(
+      init({
+        rows: [[0], [0], [0]],
+        columns: [[0], [0], [0]],
+        content: [
+          [-1, 0, -1],
+          [0, 0, -1],
+          [0, -1, 0],
+        ],
+      }).state,
+    ).toEqual([-1, 0, -1, 0, 0, -1, 0, -1, 0]);
   });
 });

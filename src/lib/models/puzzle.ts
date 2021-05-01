@@ -9,7 +9,18 @@ const isValidContent = (content: Content, width: number, height: number) =>
   content.length === height && content.every((line) => line.length === width);
 
 const initState = (data: PuzzleData) => {
+  const width = data.columns.length;
   const state = new Array(data.columns.length * data.rows.length).fill(0 as UNKNOWN);
+  if (!data.content) {
+    return state;
+  }
+  data.content.forEach((rows, y) => {
+    rows.forEach((val, x) => {
+      state[y * width + x] = val;
+    });
+  });
+  console.log(state);
+
   return state;
 };
 

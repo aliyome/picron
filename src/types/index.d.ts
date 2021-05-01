@@ -3,7 +3,7 @@ type CHECKED = 1; // is known to be checked
 type EMPTY = -1; // is known to be empty
 type Cell = CHECKED | UNKNOWN | EMPTY;
 type Line = Cell[];
-type Content = Line[];
+type Content = Line[]; // row lines
 type LineHint = number[];
 type Hint = LineHint[];
 
