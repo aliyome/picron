@@ -27,4 +27,5 @@ interface Puzzle {
     columns: Hint;
   };
   originalContent: Content;
+  state: Cell[];
 }

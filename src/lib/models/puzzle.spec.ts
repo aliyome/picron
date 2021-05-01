@@ -12,4 +12,9 @@ describe('init', () => {
       columns: [[1], []],
     });
   });
+
+  it('makes initial state', () => {
+    const puzzle = init({ rows: [[0], [0]], columns: [[0], [0]] });
+    expect(puzzle.state).toEqual([0, 0, 0, 0]);
+  });
 });
